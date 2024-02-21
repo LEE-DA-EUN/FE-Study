@@ -3,12 +3,15 @@ import Notification from "./Notification";
 
 const reservedNotifications = [
     {
+        id: 1,
         message: "안녕하세요, 오늘 일정을 알려드립니다.",
     },
     {
+        id: 2,
         message: "점심식사 시간입니다.",
     },
     {
+        id: 3,
         message: "이제 곧 미팅이 시작됩니다.",
     },
 ];
@@ -34,11 +37,19 @@ class NotificationList extends React.Component {
                     notifications: notifications,
                 });
             } else {
+                this.setState({
+                    notifications: [],
+                }); //알림 추가가 모두 끝나면 비우기 (언마운트 확인을 위해)
                 clearInterval(timer);
             }
         }, 1000);
     }
 
+    componentWillUnmount() {
+        if (timer) {
+            clearInterval(timer);
+        }
+    }
 
     render() {
         return (
@@ -46,6 +57,8 @@ class NotificationList extends React.Component {
                 {this.state.notifications.map((notification) => {
                     return (
                         <Notification
+                            key={notification.id}
+                            id={notification.id}
                             message={notification.message}
                         />
                     );
