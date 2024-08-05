@@ -2,7 +2,7 @@ import "./Main.css";
 
 const Main = () => {
   const user = {
-    name: "이정환",
+    name: "이다은",
     isLogin: true,
   };
 
